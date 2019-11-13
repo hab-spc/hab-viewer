@@ -10,11 +10,14 @@ interface FormElement extends HTMLFormElement {
     target: string;
 }
 
-const handleSubmit: React.FC = (event: FormElement) => {
+const handleSubmit = (event: React.FormEvent<FormElement>) => {
     event.preventDefault();
-    const data = new FormData(event);    // NOTE: you access FormData fields with `data.get(fieldName)`    
+    const data = new FormData(event.target);
+
+    // NOTE: you access FormData fields with `data.get(fieldName)`
     const [month, day, year] = data.get('date').split('/');
-    const serverDate = `${year}-${month}-${day}`;    data.set('birthdate', serverDate);
+    const serverDate = `${year}-${month}-${day}`;
+    data.set('birthdate', serverDate);
 
     // TODO: Implement API request
 };
@@ -28,7 +31,7 @@ const Query: React.FC<QueryProps> = (props) => {
 
     return(
         <div className="Query">
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Date:
                     <input type="date" name="date" />
