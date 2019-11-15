@@ -1,14 +1,11 @@
 import React from 'react';
 
-interface ImgProps {
-    src: string, pred: number
-}
 
 /**
  * Component to render a single image, and handle it's state
  * 
  */
-const Image: React.FC<ImgProps> = (props) => {
+const Image = (props) => {
 
     
     const {src, pred} = props;
