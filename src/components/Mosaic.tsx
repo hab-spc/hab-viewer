@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from './Image';
 
 interface MosProps {
     images: {src: string, pred: number}[]
@@ -15,10 +16,7 @@ const Mosaic: React.FC<MosProps> = (props) => {
         <div className="Mosaic">
             
             {props.images.map((elem) => {
-                return <div className="Image">
-                       <img src={require("../../public/" + elem.src)}/>
-                       <br />{elem.pred}<br/>
-                       </div>;
+                return <Image src={elem.src} pred={elem.pred}/>
                 })
             }
         </div>
