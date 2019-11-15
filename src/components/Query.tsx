@@ -10,11 +10,13 @@ interface FormElement extends HTMLFormElement {
     target: string;
 }
 
-const handleSubmit: React.FC = (event: FormElement) => {
+const handleSubmit: (Event: FormElement) => void = (event: FormElement) => {
     event.preventDefault();
-    const data = new FormData(event);    // NOTE: you access FormData fields with `data.get(fieldName)`    
-    const [month, day, year] = data.get('date').split('/');
-    const serverDate = `${year}-${month}-${day}`;    data.set('birthdate', serverDate);
+    const data = new FormData(event);    // NOTE: you access FormData fields with `data.get(fieldName)`
+    const dateStr = "" + data.get('date').toString();    
+    const [month, day, year] = dateStr.split('/');
+    const serverDate = `${year}-${month}-${day}`;    
+    data.set('birthdate', serverDate);
 
     // TODO: Implement API request
 };
@@ -31,11 +33,11 @@ const Query: React.FC<QueryProps> = (props) => {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Date:
-                    <input type="date" name="date" />
+                    <input type="string" name="date" />
                 </label>
                 <label>
                     Time:
-                    <input type="time" name="time" />
+                    <input type="string" name="time" />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
