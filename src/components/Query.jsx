@@ -10,7 +10,7 @@ const Query = (props) => {
         <div className="Query">
             <form onSubmit={props.handleDateSubmit}>
                 <label>
-                    Date: Start:
+                    Date Start:
                     <input type="string" name="date-start" onChange={props.onDateChange}/>
                 </label>
                 <label>
@@ -18,7 +18,7 @@ const Query = (props) => {
                     <input type="string" name="date-end" onChange={props.onDateChange}/>
                 </label>
                 <label>
-                    Time: Start:
+                    Time Start:
                     <input type="string" name="time-start" onChange={props.onTimeChange}/>
                 </label>
                 <label>

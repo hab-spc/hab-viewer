@@ -1,29 +1,24 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+  color: #ffffff;
+  height: 100%;
+  width: 100%;
 }
 
 .Query {
   position: relative;
   top: 0;
   width: 100%;
+  text-align: center;
   height: 100px;
+}
+
+.Query label {
+  padding: 5px;
+  margin: 5px;
+}
+
+.Query input {
+  margin: 20px 5px;
+  padding: 5px;
 }

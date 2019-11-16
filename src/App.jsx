@@ -26,14 +26,11 @@ const App = () => {
       timeEnd + " ";
 
     // get all images from that date, and time
-    useEffect(() => {
-      axios
-        .get("https://localhost:8080/api/imgs/" + DateTimeStr)
-        .then(res => {
-          // setImages(res.data);
-          console.log(res.data);
-        })
-    }, []);
+    axios
+      .get(`http://localhost:8080/api/imgs/${DateTimeStr}`)
+      .then(res => {
+        setImages(res.data);
+      });
 
   }
 
@@ -62,19 +59,13 @@ const App = () => {
 
   }
 
-  // assume we got img data from DB
-  let dummyArr = [1,2,3,4,5,6,7,8,9,10];
-  let imgDat = dummyArr.map(elem => {
-    return {src: elem + ".jpeg", pred: elem};
-  });
-
   return (
     <div className="App">
       <Query 
           onDateChange={onDateChange} 
           onTimeChange={onTimeChange}
           handleDateSubmit={handleDateSubmit} />
-      <Mosaic images={imgDat} />
+      <Mosaic images={imgs} />
     </div>
   );
 }

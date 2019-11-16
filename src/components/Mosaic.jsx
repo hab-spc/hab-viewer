@@ -13,7 +13,7 @@ const Mosaic = (props) => {
         <div className="Mosaic">
             
             {props.images.map((elem) => {
-                return <Image src={elem.src} pred={elem.pred}/>
+                return <Image image={elem}/>
                 })
             }
         </div>
