@@ -9,11 +9,11 @@ const Image = (props) => {
 
     
     const {src, pred} = props;
-    const imageDir = "../../public";
+    const imageDir = "../../public/";
 
     return(
         <div className="Image">
-            <img src={require(imageDir + src)}/>
+            <img src={imageDir + src}/>
             <br />{pred}<br/>
         </div>
     );
