@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Mosaic from './components/Mosaic';
+import Query from './components/Query';
+import Filter from './components/Filter';
+import Annotate from './components/Annotate';
 
 import axios from 'axios';
-import Query from './components/Query';
+
 
 const App = () => {
 
@@ -13,6 +16,8 @@ const App = () => {
   const [dateEnd, setDateEnd] = useState('');
   const [timeStart, setTimeStart] = useState('');
   const [timeEnd, setTimeEnd] = useState('');
+  const [currClass, setCurrClass] = useState('All');
+  const [currAnnotClass, setCurrAnnotClass] = useState('');
 
   // get images from server on query
   const handleDateSubmit = (e) => {
@@ -31,13 +36,11 @@ const App = () => {
       .then(res => {
         setImages(res.data);
       });
-
   }
 
   // update time
   const onTimeChange = (e) => {
     let timeStr = e.target.value;
-    console.log(timeStr);
 
     if(e.target.name === "time-start"){    
       setTimeStart(timeStr);
@@ -49,14 +52,30 @@ const App = () => {
   // update date
   const onDateChange = (e) => {
     let dateStr = e.target.value;
-    console.log(dateStr);
     
     if(e.target.name === "date-start"){    
       setDateStart(dateStr);
     } else {
       setDateEnd(dateStr);
     }
+  }
 
+  // update current class
+  const onClassChange = (e) => {
+    let selectedClass = e.target.value;
+    console.log(selectedClass);
+    setCurrClass(selectedClass);
+  }
+
+  // update current annotation class
+  const onAnnotClassChange = (e) => {
+    let selectedClass = e.target.value;
+    setCurrAnnotClass(selectedClass);
+  }
+
+  // update annotation in DB
+  const handleAnnotate = (e) => {
+    console.log("annotate");
   }
 
   return (
@@ -65,7 +84,21 @@ const App = () => {
           onDateChange={onDateChange} 
           onTimeChange={onTimeChange}
           handleDateSubmit={handleDateSubmit} />
-      <Mosaic images={imgs} />
+      <hr />
+      <div className="view-toolbar">
+        <Filter 
+          classList={classList}
+          onClassChange={onClassChange} 
+          currClass={currClass}
+        />
+        <Annotate 
+          classList={classList}
+          onAnnotClassChange={onAnnotClassChange}
+          currAnnotClass={currAnnotClass}
+        />
+      </div>
+      <hr />
+      <Mosaic images={imgs} currClass={currClass} />
     </div>
   );
 }

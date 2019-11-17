@@ -1,16 +1,28 @@
-.App {
+body {
   background-color: #282c34;
   color: #ffffff;
+}
+
+/* app level rules */
+.App {
   height: 100%;
   width: 100%;
 }
 
+input {
+  border-radius: 10px;
+}
+
+hr {
+  margin: 0;
+}
+
+/* query rules */
 .Query {
   position: relative;
   top: 0;
   width: 100%;
   text-align: center;
-  height: 100px;
 }
 
 .Query label {
@@ -21,4 +33,55 @@
 .Query input {
   margin: 20px 5px;
   padding: 5px;
+}
+
+/* filter rules */
+.Filter {
+  position:relative;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.Filter select {
+  padding:  5px;
+  margin: 10px 5px;
+  border-radius: 10px;
+}
+
+.Filter label {
+  padding: 5px;
+  margin: 5px;
+}
+
+/* annotate rules */
+.Annotate {
+  position:relative;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  height: 50px;
+}
+
+.Annotate select {
+  padding: 5px;
+  margin: 10px 5px;
+  border-radius: 10px;
+}
+
+.Annotate label {
+  padding: 5px;
+  margin: 5px;
+}
+
+.Annotate input {
+  padding: 5px;
+  margin: 5px;
+}
+
+/* toolbar rules */
+.view-toolbar {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  padding: 10px 0px;
 }

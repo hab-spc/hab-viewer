@@ -9,12 +9,17 @@ import Image from './Image';
  */
 const Mosaic = (props) => {
 
+    // filter images by current class
+    let imgsToRender = []
+    if (props.currClass !== "all") {
+        imgsToRender = props.images.filter(img => img.ml_prediction === props.currClass);
+    }
+
     return(
         <div className="Mosaic">
-            
-            {props.images.map((elem) => {
-                return <Image image={elem}/>
-                })
+            { imgsToRender.map((img) => {
+                return <Image id={img.image_id} image={img}/>
+                })   
             }
         </div>
     );
