@@ -18,6 +18,7 @@ const App = () => {
   const [timeEnd, setTimeEnd] = useState('');
   const [currClass, setCurrClass] = useState('All');
   const [currAnnotClass, setCurrAnnotClass] = useState('');
+  const [classList, setClassList] = useState([]);
 
   // get images from server on query
   const handleDateSubmit = (e) => {
@@ -35,6 +36,9 @@ const App = () => {
       .get(`http://localhost:8080/api/imgs/${DateTimeStr}`)
       .then(res => {
         setImages(res.data);
+
+        // compute list of classes from response
+        setClassList(['All', ...new Set(res.data.map(img => img.ml_prediction))]);
       });
   }
 
