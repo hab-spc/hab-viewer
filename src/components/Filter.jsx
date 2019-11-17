@@ -11,7 +11,7 @@ const Filter = (props) => {
             <label>
                 Filter by Class:
                 <select value={props.currClass} onChange={props.onClassChange}>
-                    {props.classList.map(classStr => <option value={classStr}>{ClassStr}</option>)}
+                    {props.classList.map(classStr => <option value={classStr}>{classStr}</option>)}
                 </select>
             </label>
         </div>

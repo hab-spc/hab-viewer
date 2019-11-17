@@ -12,7 +12,7 @@ const Annotate = (props) => {
                 <label>
                     Annotate as Class:
                     <select value={props.currAnnotClass} onChange={props.onAnnotClassChange}>
-                        {props.classList.map( classStr => <option value={classStr}>{ClassStr}</option>)}
+                        {props.classList.map( classStr => <option value={classStr}>{classStr}</option>)}
                     </select>
                 </label>
                 <input type="submit" value="Annotate"></input>

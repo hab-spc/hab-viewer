@@ -35,10 +35,10 @@ const App = () => {
     axios
       .get(`http://localhost:8080/api/imgs/${DateTimeStr}`)
       .then(res => {
-        setImages(res.data);
+        setImages(res.data.data);
 
         // compute list of classes from response
-        setClassList(['All', ...new Set(res.data.map(img => img.ml_prediction))]);
+        setClassList(['All', ...new Set(res.data.data.map(img => img.ml_prediction))]);
       });
   }
 

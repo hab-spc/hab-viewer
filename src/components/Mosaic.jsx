@@ -11,7 +11,7 @@ const Mosaic = (props) => {
 
     // filter images by current class
     let imgsToRender = []
-    if (props.currClass !== "all") {
+    if (props.currClass !== "All") {
         imgsToRender = props.images.filter(img => img.ml_prediction === props.currClass);
     }
 
