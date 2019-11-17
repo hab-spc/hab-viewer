@@ -13,12 +13,14 @@ const Mosaic = (props) => {
     let imgsToRender = []
     if (props.currClass !== "All") {
         imgsToRender = props.images.filter(img => img.ml_prediction === props.currClass);
+    } else {
+        imgsToRender = props.images;
     }
 
     return(
         <div className="Mosaic">
             { imgsToRender.map((img) => {
-                return <Image id={img.image_id} image={img}/>
+                return <Image key={img.image_id} image={img}/>
                 })   
             }
         </div>

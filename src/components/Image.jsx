@@ -33,12 +33,12 @@ const Image = (props) => {
         annot_image_tags,
         annot_machine_label,
         annot_human_label
-    } = props;
-    const imageDir = "../../public/";
+    } = props.image;
+    const imageDir = "../../public";
 
     return(
         <div className="Image">
-            <img src={imageDir + image_filename}/>
+            <img src={imageDir + image_filename} alt={`This is a ${ml_prediction}`}/>
         </div>
     );
 

@@ -85,3 +85,18 @@ hr {
   grid-template-columns: 25% 75%;
   padding: 10px 0px;
 }
+
+/* Mosaic rules */
+.Mosaic {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  background-color: #282c38;
+}
+
+
+/* Image rules */
+.Image {
+  display: inline;
+  margin: 20px;
+  border: 2px solid gray;
+}
