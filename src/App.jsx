@@ -19,6 +19,7 @@ const App = () => {
   const [currClass, setCurrClass] = useState('All');
   const [currAnnotClass, setCurrAnnotClass] = useState('');
   const [classList, setClassList] = useState([]);
+  const [viewAnnotate, setViewAnnotate] = useState(false);
 
   // get images from server on query
   const handleDateSubmit = (e) => {
@@ -76,9 +77,9 @@ const App = () => {
     setCurrAnnotClass(selectedClass);
   }
 
-  // update annotation in DB
-  const handleAnnotate = (e) => {
-    console.log("annotate");
+  // change mosaic to render based on annotation
+  const onViewChange = (e) => {
+    setViewAnnotate(!viewAnnotate);
   }
 
   return (
@@ -98,10 +99,16 @@ const App = () => {
           classList={classList}
           onAnnotClassChange={onAnnotClassChange}
           currAnnotClass={currAnnotClass}
+          viewAnnotate={viewAnnotate}
+          onViewChange={onViewChange}
         />
       </div>
       <hr />
-      <Mosaic images={imgs} currClass={currClass} />
+      <Mosaic 
+        images={imgs} 
+        currClass={currClass} 
+        viewAnnotate={viewAnnotate}
+        />
     </div>
   );
 }

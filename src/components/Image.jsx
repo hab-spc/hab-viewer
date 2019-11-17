@@ -38,7 +38,7 @@ const Image = (props) => {
 
     return(
         <div className="Image">
-            <img src={imageDir + image_filename} alt={`This is a ${ml_prediction}`}/>
+            <img src={imageDir + image_filename} alt={image_id} onClick={props.onClick}/>
         </div>
     );
 

@@ -8,15 +8,12 @@ const Annotate = (props) => {
 
     return(
         <div className="Annotate">
-            <form onSubmit={props.handleAnnotate}>
-                <label>
-                    Annotate as Class:
-                    <select value={props.currAnnotClass} onChange={props.onAnnotClassChange}>
-                        {props.classList.map( classStr => <option key={classStr} value={classStr}>{classStr}</option>)}
-                    </select>
-                </label>
-                <input type="submit" value="Annotate"></input>
-            </form>
+            <label>
+                Annotate as Class:
+                <select value={props.currAnnotClass} onChange={props.onAnnotClassChange}>
+                    {props.classList.map( classStr => <option key={classStr} value={classStr}>{classStr}</option>)}
+                </select>
+            </label>
         </div>
     );
 

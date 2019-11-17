@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from './Image';
-
 
 /**
  * Component to deal with displaying images
@@ -8,6 +7,25 @@ import Image from './Image';
  * 
  */
 const Mosaic = (props) => {
+
+    // define state
+    const [selectedImgs, addToImgs] = useState([]);
+
+    // update annotation in DB
+    const handleAnnotate = (e) => {
+        // TODO send request
+        e.preventDefault();
+        console.log("annotate");
+        console.log(selectedImgs);
+    }
+
+    // add selected image to annotation list
+    const selectImage = (e) => {
+        console.log(`selected image ${e.target}`);
+
+        // TODO: remove image from list if clicked again
+        addToImgs(selectedImgs.concat([e.target.alt]));
+    }
 
     // filter images by current class
     let imgsToRender = []
@@ -20,9 +38,12 @@ const Mosaic = (props) => {
     return(
         <div className="Mosaic">
             { imgsToRender.map((img) => {
-                return <Image key={img.image_id} image={img}/>
-                })   
+                    return <Image key={img.image_id} image={img} onClick={selectImage}/>
+                })
             }
+            <form onSubmit={handleAnnotate}>
+                <input type="submit" value="Annotate"></input>                
+            </form>
         </div>
     );
 

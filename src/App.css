@@ -93,6 +93,20 @@ hr {
   background-color: #282c38;
 }
 
+.Mosaic form {
+  position: fixed;
+  bottom: 0;
+  background-color: #282c34;
+  width: 100%;
+  text-align: right;
+  padding: 30px 40px;
+}
+
+.Mosaic form input {
+  position: relative;
+  right: 100px;
+  padding: 10px;
+}
 
 /* Image rules */
 .Image {
