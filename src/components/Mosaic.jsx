@@ -18,9 +18,9 @@ const Mosaic = (props) => {
         e.preventDefault();
 
         // alert about annotation
-        const confirm = alert(`You annotated ${selectImgs.length} Images as ${props.currAnnotClass}`);
+        const conf = window.confirm(`You annotated ${selectedImgs.length} Images as ${props.currAnnotClass}`);
 
-        if (confirm) {
+        if (conf) {
             // send post request
             axios
                 .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
