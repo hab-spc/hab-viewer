@@ -13,7 +13,7 @@ const Mosaic = (props) => {
 
     // update annotation in DB
     const handleAnnotate = (e) => {
-        // TODO send request
+        // TODO send PUT request
         e.preventDefault();
         console.log("annotate");
         console.log(selectedImgs);
@@ -30,11 +30,12 @@ const Mosaic = (props) => {
     // filter images by current class
     let imgsToRender = []
     if (props.currClass !== "All") {
-        imgsToRender = props.images.filter(img => img.ml_prediction === props.currClass);
+        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_labl === props.currClass) || img.ml_prediction === props.currClass);
     } else {
         imgsToRender = props.images;
     }
 
+    // TODO add redborder
     return(
         <div className="Mosaic">
             { imgsToRender.map((img) => {

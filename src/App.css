@@ -114,3 +114,7 @@ hr {
   margin: 20px;
   border: 2px solid gray;
 }
+
+.red-border {
+  border: 3px solid red;
+}

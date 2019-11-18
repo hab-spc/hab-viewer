@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 
 /**
@@ -6,6 +6,7 @@ import React from 'react';
  * 
  */
 const Image = (props) => {
+    const [selected, setSelected] = useState(false);
 
     // destructure image object received
     const {
@@ -36,9 +37,24 @@ const Image = (props) => {
     } = props.image;
     const imageDir = "../../public";
 
+    // handle click event
+    const onImageClick = (e) => {
+        // call previous onClick
+        props.onClick(e, !selected);
+        
+        // change selected state
+        setSelected(!selected);
+
+    }
+
     return(
         <div className="Image">
-            <img src={imageDir + image_filename} alt={image_id} onClick={props.onClick}/>
+            {selected ? (
+            <div className="red-border">
+                <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+            </div>) : (
+            <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+            )}
         </div>
     );
 

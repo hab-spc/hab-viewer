@@ -34,7 +34,7 @@ const App = () => {
 
     // get all images from that date, and time
     axios
-      .get(`http://localhost:8080/api/imgs/${DateTimeStr}`)
+      .get(`http://localhost:3002/api/imgs/${DateTimeStr}`)
       .then(res => {
         setImages(res.data.data);
         // compute list of classes from response
