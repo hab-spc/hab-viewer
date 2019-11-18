@@ -26,6 +26,15 @@ const Mosaic = (props) => {
                 .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
                     console.log(res);
+                    // rerender Mosaic
+                    const imgs = props.imags.map((img) => {
+                        if (selectedImgs.includes(img.image_id)){
+                            img.annot_human_label = props.currAnnotClass;
+                        } 
+                        return img;
+                    });
+
+                    props.reRender(imgs);
                 });
             
             // TODO clear all selections 
@@ -48,7 +57,7 @@ const Mosaic = (props) => {
     // filter images by current class
     let imgsToRender = []
     if (props.currClass !== "All") {
-        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_labl === props.currClass) || img.ml_prediction === props.currClass);
+        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_label === props.currClass) || img.ml_prediction === props.currClass);
     } else {
         imgsToRender = props.images;
     }

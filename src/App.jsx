@@ -82,6 +82,11 @@ const App = () => {
     setViewAnnotate(!viewAnnotate);
   }
 
+  // rerender the view
+  const reRender = (imgs) => {
+    setImages(imgs);    
+  }
+
   return (
     <div className="App">
       <Query 
@@ -109,6 +114,7 @@ const App = () => {
         currClass={currClass}
         currAnnotClass={currAnnotClass} 
         viewAnnotate={viewAnnotate}
+        reRender={reRender}
         />
     </div>
   );
