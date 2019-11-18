@@ -23,7 +23,7 @@ const Mosaic = (props) => {
         if (confirm) {
             // send post request
             axios
-                .post("http://localhost:3002/api/annot", selectedImgs)
+                .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
                     console.log(res);
                 });
