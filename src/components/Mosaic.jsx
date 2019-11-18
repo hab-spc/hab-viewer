@@ -20,11 +20,18 @@ const Mosaic = (props) => {
     }
 
     // add selected image to annotation list
-    const selectImage = (e) => {
-        console.log(`selected image ${e.target}`);
+    const selectImage = (e, selected) => {
 
-        // TODO: remove image from list if clicked again
-        addToImgs(selectedImgs.concat([e.target.alt]));
+        if(selected) {
+            console.log(`selected image ${e.target}`);
+
+            // TODO: remove image from list if clicked again
+            addToImgs(selectedImgs.concat([e.target.alt]));
+        } else {
+            console.log(`deselected image ${e.target}`);
+
+            addToImgs(selectedImgs.filter(img => img !== e.target.alt));
+        }
     }
 
     // filter images by current class
