@@ -106,7 +106,8 @@ const App = () => {
       <hr />
       <Mosaic 
         images={imgs} 
-        currClass={currClass} 
+        currClass={currClass}
+        currAnnotClass={currAnnotClass} 
         viewAnnotate={viewAnnotate}
         />
     </div>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Image from './Image';
+import axios from 'axios';
 
 /**
  * Component to deal with displaying images
@@ -13,10 +14,23 @@ const Mosaic = (props) => {
 
     // update annotation in DB
     const handleAnnotate = (e) => {
-        // TODO send PUT request
+
         e.preventDefault();
-        console.log("annotate");
-        console.log(selectedImgs);
+
+        // alert about annotation
+        const confirm = alert(`You annotated ${selectImgs.length} Images as ${props.currAnnotClass}`);
+
+        if (confirm) {
+            // send post request
+            axios
+                .post("http://localhost:3002/api/annot", selectedImgs)
+                .then( res => {
+                    console.log(res);
+                });
+            
+            // TODO clear all selections 
+        }
+        
     }
 
     // add selected image to annotation list
@@ -24,12 +38,9 @@ const Mosaic = (props) => {
 
         if(selected) {
             console.log(`selected image ${e.target}`);
-
-            // TODO: remove image from list if clicked again
             addToImgs(selectedImgs.concat([e.target.alt]));
         } else {
             console.log(`deselected image ${e.target}`);
-
             addToImgs(selectedImgs.filter(img => img !== e.target.alt));
         }
     }
