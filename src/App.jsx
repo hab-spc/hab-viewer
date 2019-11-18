@@ -82,6 +82,11 @@ const App = () => {
     setViewAnnotate(!viewAnnotate);
   }
 
+  // rerender the view
+  const reRender = (imgs) => {
+    setImages(imgs);    
+  }
+
   return (
     <div className="App">
       <Query 
@@ -106,8 +111,10 @@ const App = () => {
       <hr />
       <Mosaic 
         images={imgs} 
-        currClass={currClass} 
+        currClass={currClass}
+        currAnnotClass={currAnnotClass} 
         viewAnnotate={viewAnnotate}
+        reRender={reRender}
         />
     </div>
   );

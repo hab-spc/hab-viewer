@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Image from './Image';
+import axios from 'axios';
 
 /**
  * Component to deal with displaying images
@@ -13,28 +14,55 @@ const Mosaic = (props) => {
 
     // update annotation in DB
     const handleAnnotate = (e) => {
-        // TODO send request
+
         e.preventDefault();
-        console.log("annotate");
-        console.log(selectedImgs);
+
+        // alert about annotation
+        const conf = window.confirm(`You annotated ${selectedImgs.length} Images as ${props.currAnnotClass}`);
+
+        if (conf) {
+            // send post request
+            axios
+                .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
+                .then( res => {
+                    console.log(res);
+                    // rerender Mosaic
+                    const imgs = props.imags.map((img) => {
+                        if (selectedImgs.includes(img.image_id)){
+                            img.annot_human_label = props.currAnnotClass;
+                        } 
+                        return img;
+                    });
+
+                    props.reRender(imgs);
+                });
+            
+            // TODO clear all selections 
+        }
+        
     }
 
     // add selected image to annotation list
-    const selectImage = (e) => {
-        console.log(`selected image ${e.target}`);
+    const selectImage = (e, selected) => {
 
-        // TODO: remove image from list if clicked again
-        addToImgs(selectedImgs.concat([e.target.alt]));
+        if(selected) {
+            console.log(`selected image ${e.target}`);
+            addToImgs(selectedImgs.concat([e.target.alt]));
+        } else {
+            console.log(`deselected image ${e.target}`);
+            addToImgs(selectedImgs.filter(img => img !== e.target.alt));
+        }
     }
 
     // filter images by current class
     let imgsToRender = []
     if (props.currClass !== "All") {
-        imgsToRender = props.images.filter(img => img.ml_prediction === props.currClass);
+        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_label === props.currClass) || img.ml_prediction === props.currClass);
     } else {
         imgsToRender = props.images;
     }
 
+    // TODO add redborder
     return(
         <div className="Mosaic">
             { imgsToRender.map((img) => {
