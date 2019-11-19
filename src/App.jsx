@@ -10,6 +10,7 @@ import axios from 'axios';
 
 // parent component
 // handles img state
+// TODO add dynamic filter upon new annotation
 const App = () => {
 
   // define image state
@@ -79,7 +80,6 @@ const App = () => {
   // update current class
   const onClassChange = (e) => {
     let selectedClass = e.target.value;
-    console.log(selectedClass);
     setCurrClass(selectedClass);
   }
 

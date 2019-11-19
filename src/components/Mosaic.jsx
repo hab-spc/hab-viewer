@@ -27,9 +27,10 @@ const Mosaic = (props) => {
                 .then( res => {
                     console.log(res);
                     // rerender Mosaic
-                    const imgs = props.imags.map((img) => {
+                    const imgs = props.images.map((img) => {
                         if (selectedImgs.includes(img.image_id)){
-                            img.annot_human_label = props.currAnnotClass;
+                            img.ml_user_labels = props.currAnnotClass;
+                            console.log(img);
                         } 
                         return img;
                     });
@@ -57,12 +58,15 @@ const Mosaic = (props) => {
     // filter images by current class
     let imgsToRender = []
     if (props.currClass !== "All") {
-        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_label === props.currClass) || img.ml_prediction === props.currClass);
+        imgsToRender = props.images.filter((img) => {
+            if (img.ml_user_labels != null && img.ml_user_labels === props.currClass) return true;
+            else if (img.ml_user_labels == null && img.ml_prediction === props.currClass) return true;
+        });
     } else {
         imgsToRender = props.images;
     }
 
-    // TODO add redborder
+    // TODO add yellow border for annotated
     return(
         <div className="Mosaic">
             { imgsToRender.map((img) => {
