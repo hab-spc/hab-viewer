@@ -7,7 +7,8 @@ import Annotate from './components/Annotate';
 
 import axios from 'axios';
 
-
+// parent component
+// handles img state
 const App = () => {
 
   // define image state
@@ -20,6 +21,16 @@ const App = () => {
   const [currAnnotClass, setCurrAnnotClass] = useState('');
   const [classList, setClassList] = useState([]);
   const [viewAnnotate, setViewAnnotate] = useState(false);
+  const [annotClassList, setAnnotClassList] = useState([]);
+
+  // get annotClassList from json
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/api/annot-list")
+      .then(res =>{
+        setAnnotClassList(res.data.classList);
+      });
+  }, []);
 
   // get images from server on query
   const handleDateSubmit = (e) => {
@@ -101,7 +112,7 @@ const App = () => {
           currClass={currClass}
         />
         <Annotate 
-          classList={classList}
+          classList={annotClassList}
           onAnnotClassChange={onAnnotClassChange}
           currAnnotClass={currAnnotClass}
           viewAnnotate={viewAnnotate}

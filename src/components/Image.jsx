@@ -9,6 +9,7 @@ const Image = (props) => {
     const [selected, setSelected] = useState(false);
 
     // destructure image object received
+    // important deets: id, axisLengths, area, prediction, probability
     const {
         image_filename,
         image_id,
@@ -29,6 +30,7 @@ const Image = (props) => {
         ml_model_name,
         ml_user_labels,
         ml_prediction,
+        ml_probability,
         ml_prediction_timestamp,
         annot_image_status,
         annot_image_tags,
