@@ -4,6 +4,7 @@ import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';
 import Annotate from './components/Annotate';
+import Options from './components/Options';
 
 import axios from 'axios';
 
@@ -119,6 +120,7 @@ const App = () => {
           onViewChange={onViewChange}
         />
       </div>
+      <Options />
       <hr />
       <Mosaic 
         images={imgs} 
