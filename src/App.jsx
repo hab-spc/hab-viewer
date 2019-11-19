@@ -120,7 +120,9 @@ const App = () => {
           onViewChange={onViewChange}
         />
       </div>
-      <Options />
+      <Options 
+        setAnnotClassList={setAnnotClassList}  
+      />
       <hr />
       <Mosaic 
         images={imgs} 

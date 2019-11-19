@@ -15,8 +15,7 @@ const AddClass = (props) => {
         axios
             .post(`http://localhost:3002/api/annot-list/${newClass}`)
             .then((res) => {
-                console.log(res);
-                // TODO set annotClassList
+                props.setAnnotClassList(res.data.classList);
             });
     }
 

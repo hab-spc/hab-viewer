@@ -10,7 +10,7 @@ const Options = (props) => {
     // a dropdown, or sidebar
     return (
         <div className="Options">
-            <AddClass />
+            <AddClass setAnnotClassList={props.setAnnotClassList}/>
         </div>
     );
 
