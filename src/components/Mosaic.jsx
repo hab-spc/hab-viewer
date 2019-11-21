@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Image from './Image';
+import Popup from './Popup';
 import axios from 'axios';
 
 /**
@@ -11,6 +12,12 @@ const Mosaic = (props) => {
 
     // define state
     const [selectedImgs, addToImgs] = useState([]);
+
+    // Define state for the popup modal
+    const [popupImage, setPopupImage] = useState(null);
+    const handlePopupOpen = (imageArg) => setPopupImage(imageArg);
+    const handlePopupClose = () => setPopupImage(null);
+    console.log("Popup state set to " + popupImage);
 
     // update annotation in DB
     const handleAnnotate = (e) => {
@@ -27,9 +34,10 @@ const Mosaic = (props) => {
                 .then( res => {
                     console.log(res);
                     // rerender Mosaic
-                    const imgs = props.imags.map((img) => {
+                    const imgs = props.images.map((img) => {
                         if (selectedImgs.includes(img.image_id)){
-                            img.annot_human_label = props.currAnnotClass;
+                            img.ml_user_labels = props.currAnnotClass;
+                            console.log(img);
                         } 
                         return img;
                     });
@@ -38,6 +46,7 @@ const Mosaic = (props) => {
                 });
             
             // TODO clear all selections 
+            addToImgs([]);
         }
         
     }
@@ -57,16 +66,23 @@ const Mosaic = (props) => {
     // filter images by current class
     let imgsToRender = []
     if (props.currClass !== "All") {
-        imgsToRender = props.images.filter(img => (img.annot_human_label != null && img.annot_human_label === props.currClass) || img.ml_prediction === props.currClass);
+        imgsToRender = props.images.filter((img) => {
+            if (img.ml_user_labels != null && img.ml_user_labels === props.currClass) return true;
+            else if (img.ml_user_labels == null && img.ml_prediction === props.currClass) return true;
+        });
     } else {
         imgsToRender = props.images;
     }
 
-    // TODO add redborder
     return(
-        <div className="Mosaic">
+        <div className="Mosaic">            
+            {popupImage != null ? 
+                <Popup image={popupImage} handleClose={handlePopupClose} centered/> : 
+                <div></div>}
+
             { imgsToRender.map((img) => {
-                    return <Image key={img.image_id} image={img} onClick={selectImage}/>
+                    return <Image key={img.image_id} image={img} 
+                            onClick={selectImage} handlePopupOpen={handlePopupOpen}/>
                 })
             }
             <form onSubmit={handleAnnotate}>

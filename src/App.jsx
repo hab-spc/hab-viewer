@@ -4,22 +4,34 @@ import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';
 import Annotate from './components/Annotate';
+import Options from './components/Options';
 
 import axios from 'axios';
 
-
+// parent component
+// handles img state
+// TODO add dynamic filter upon new annotation
+// onFilterChange clear selected
 const App = () => {
 
   // define image state
   const [imgs, setImages] = useState([]);
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
-  const [timeStart, setTimeStart] = useState('');
-  const [timeEnd, setTimeEnd] = useState('');
   const [currClass, setCurrClass] = useState('All');
   const [currAnnotClass, setCurrAnnotClass] = useState('');
   const [classList, setClassList] = useState([]);
   const [viewAnnotate, setViewAnnotate] = useState(false);
+  const [annotClassList, setAnnotClassList] = useState([]);
+
+  // get annotClassList from json
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/api/annot-list")
+      .then(res =>{
+        setAnnotClassList(res.data.classList);
+      });
+  }, []);
 
   // get images from server on query
   const handleDateSubmit = (e) => {
@@ -28,9 +40,7 @@ const App = () => {
     // get date and time range
     const DateTimeStr = 
       dateStart + " " +
-      dateEnd + " " +
-      timeStart + " " +
-      timeEnd + " ";
+      dateEnd;
 
     // get all images from that date, and time
     axios
@@ -40,17 +50,6 @@ const App = () => {
         // compute list of classes from response
         setClassList(['All', ...new Set(res.data.data.map(img => img.ml_prediction))]);
       });
-  }
-
-  // update time
-  const onTimeChange = (e) => {
-    let timeStr = e.target.value;
-
-    if(e.target.name === "time-start"){    
-      setTimeStart(timeStr);
-    } else {
-      setTimeEnd(timeStr);
-    }
   }
 
   // update date
@@ -67,7 +66,6 @@ const App = () => {
   // update current class
   const onClassChange = (e) => {
     let selectedClass = e.target.value;
-    console.log(selectedClass);
     setCurrClass(selectedClass);
   }
 
@@ -91,7 +89,6 @@ const App = () => {
     <div className="App">
       <Query 
           onDateChange={onDateChange} 
-          onTimeChange={onTimeChange}
           handleDateSubmit={handleDateSubmit} />
       <hr />
       <div className="view-toolbar">
@@ -101,13 +98,16 @@ const App = () => {
           currClass={currClass}
         />
         <Annotate 
-          classList={classList}
+          classList={annotClassList}
           onAnnotClassChange={onAnnotClassChange}
           currAnnotClass={currAnnotClass}
           viewAnnotate={viewAnnotate}
           onViewChange={onViewChange}
         />
       </div>
+      <Options 
+        setAnnotClassList={setAnnotClassList}  
+      />
       <hr />
       <Mosaic 
         images={imgs} 
