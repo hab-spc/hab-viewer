@@ -11,6 +11,7 @@ const Image = (props) => {
     
     // State for the popup modal
     const [popup, setPopup] = useState(false);
+    const handlePopupClose = () => setPopup(false);
 
     // destructure image object received
     const {
@@ -44,7 +45,7 @@ const Image = (props) => {
 
     // handle click event
     const onImageClick = (e) => {
-        console.log("Cclick detected");
+        console.log("Click detected");
         if (e.altKey) {
             console.log("Alt-click detected");
             setPopup(true);
@@ -66,8 +67,9 @@ const Image = (props) => {
             <div className="red-border">
                 <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             </div>) : (
-
-            {popup ? <Popup show={popup} image={props.image} handleClose={setPopup(false)}/> : <div></div>}
+            <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+            )}
+            {popup ? <Popup image={props.image} handleClose={handlePopupClose}/> : <div></div>}
         </div>
     );
 

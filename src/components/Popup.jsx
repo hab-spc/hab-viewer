@@ -20,7 +20,7 @@ const Popup = (props) => {
 
     return (
         <div className="Popup">
-            <Modal.Dialog show={props.show} onHide={props.handleClose}>
+            <Modal.Dialog show={props.show}>
                 <Modal.Header closeButton>
                     <img src={imageDir + image_filename} alt={image_id}/>
                 </Modal.Header>

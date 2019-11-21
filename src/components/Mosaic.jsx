@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Image from './Image';
+import Popup from './Popup';
 import axios from 'axios';
 
 /**
@@ -11,6 +12,11 @@ const Mosaic = (props) => {
 
     // define state
     const [selectedImgs, addToImgs] = useState([]);
+
+    // Define state for the popup modal
+    const [popup, setPopup] = useState(false);
+    const handlePopupOpen = () => setPopup(true);
+    const handlePopupClose = () => setPopup(false);
 
     // update annotation in DB
     const handleAnnotate = (e) => {
@@ -68,7 +74,11 @@ const Mosaic = (props) => {
 
     // TODO add yellow border for annotated
     return(
-        <div className="Mosaic">
+        <div className="Mosaic">            
+            {popup ? 
+                <Popup image={props.image} handleClose={handlePopupClose}/> : 
+                <div></div>}
+
             { imgsToRender.map((img) => {
                     return <Image key={img.image_id} image={img} onClick={selectImage}/>
                 })
