@@ -18,8 +18,6 @@ const App = () => {
   const [imgs, setImages] = useState([]);
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
-  const [timeStart, setTimeStart] = useState('');
-  const [timeEnd, setTimeEnd] = useState('');
   const [currClass, setCurrClass] = useState('All');
   const [currAnnotClass, setCurrAnnotClass] = useState('');
   const [classList, setClassList] = useState([]);
@@ -42,9 +40,7 @@ const App = () => {
     // get date and time range
     const DateTimeStr = 
       dateStart + " " +
-      dateEnd + " " +
-      timeStart + " " +
-      timeEnd + " ";
+      dateEnd;
 
     // get all images from that date, and time
     axios
@@ -54,17 +50,6 @@ const App = () => {
         // compute list of classes from response
         setClassList(['All', ...new Set(res.data.data.map(img => img.ml_prediction))]);
       });
-  }
-
-  // update time
-  const onTimeChange = (e) => {
-    let timeStr = e.target.value;
-
-    if(e.target.name === "time-start"){    
-      setTimeStart(timeStr);
-    } else {
-      setTimeEnd(timeStr);
-    }
   }
 
   // update date
