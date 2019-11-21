@@ -89,7 +89,6 @@ const App = () => {
     <div className="App">
       <Query 
           onDateChange={onDateChange} 
-          onTimeChange={onTimeChange}
           handleDateSubmit={handleDateSubmit} />
       <hr />
       <div className="view-toolbar">
