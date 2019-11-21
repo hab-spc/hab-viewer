@@ -35,7 +35,7 @@ const Popup = (props) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="primary">Close</Button>
+                    <Button variant="primary" onClick={props.handlePopupClose}>Close</Button>
                 </Modal.Footer>
             </Modal.Dialog>
         </div>

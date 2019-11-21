@@ -14,9 +14,10 @@ const Mosaic = (props) => {
     const [selectedImgs, addToImgs] = useState([]);
 
     // Define state for the popup modal
-    const [popup, setPopup] = useState(false);
-    const handlePopupOpen = () => setPopup(true);
-    const handlePopupClose = () => setPopup(false);
+    const [popupImage, setPopupImage] = useState(null);
+    const handlePopupOpen = (imageArg) => setPopupImage(imageArg);
+    const handlePopupClose = () => setPopupImage(null);
+    console.log("Popup state set to " + popupImage);
 
     // update annotation in DB
     const handleAnnotate = (e) => {
@@ -75,12 +76,13 @@ const Mosaic = (props) => {
     // TODO add yellow border for annotated
     return(
         <div className="Mosaic">            
-            {popup ? 
-                <Popup image={props.image} handleClose={handlePopupClose}/> : 
+            {popupImage != null ? 
+                <Popup image={popupImage} handleClose={handlePopupClose} centered/> : 
                 <div></div>}
 
             { imgsToRender.map((img) => {
-                    return <Image key={img.image_id} image={img} onClick={selectImage}/>
+                    return <Image key={img.image_id} image={img} 
+                            onClick={selectImage} handlePopupOpen={handlePopupOpen}/>
                 })
             }
             <form onSubmit={handleAnnotate}>
