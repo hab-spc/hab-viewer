@@ -4,11 +4,13 @@ import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';
 import Annotate from './components/Annotate';
+import Options from './components/Options';
 
 import axios from 'axios';
 
 // parent component
 // handles img state
+// TODO add dynamic filter upon new annotation
 const App = () => {
 
   // define image state
@@ -78,7 +80,6 @@ const App = () => {
   // update current class
   const onClassChange = (e) => {
     let selectedClass = e.target.value;
-    console.log(selectedClass);
     setCurrClass(selectedClass);
   }
 
@@ -119,6 +120,9 @@ const App = () => {
           onViewChange={onViewChange}
         />
       </div>
+      <Options 
+        setAnnotClassList={setAnnotClassList}  
+      />
       <hr />
       <Mosaic 
         images={imgs} 

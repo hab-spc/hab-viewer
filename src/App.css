@@ -118,3 +118,20 @@ hr {
 .red-border {
   border: 3px solid red;
 }
+
+.Annotated {
+  border: 3px solid yellow;
+}
+
+/* Option Tab rules */
+
+
+/* Add class rules */
+.AddClass input {
+  margin: 10px 5px;
+  padding: 5px;
+}
+
+.AddClass label {
+  margin: 30px 20px;
+}

@@ -66,8 +66,7 @@ const Image = (props) => {
             <div className="red-border">
                 <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             </div>) : (
-            <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
-            )}
+
             {popup ? <Popup show={popup} image={props.image} handleClose={setPopup(false)}/> : <div></div>}
         </div>
     );
