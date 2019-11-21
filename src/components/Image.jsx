@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 /**
  * Component to render a single image, and handle it's state
  * 
@@ -8,8 +7,8 @@ import React, {useState} from 'react';
 const Image = (props) => {
     const [selected, setSelected] = useState(false);
 
+
     // destructure image object received
-    // important deets: id, axisLengths, area, prediction, probability
     const {
         image_filename,
         image_id,
@@ -41,12 +40,17 @@ const Image = (props) => {
 
     // handle click event
     const onImageClick = (e) => {
-        // call previous onClick
-        props.onClick(e, !selected);
-        
-        // change selected state
-        setSelected(!selected);
-
+        if (e.altKey) {
+            props.handlePopupOpen(props.image);
+            console.log("Alt-click detected: " + props.image);
+            
+        } else {
+            // call previous onClick
+            props.onClick(e, !selected);
+            
+            // change selected state
+            setSelected(!selected);
+        }
     }
 
     return(
@@ -55,9 +59,8 @@ const Image = (props) => {
             <div className="red-border">
                 <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             </div>) : (
-            <div className={ ml_user_labels == null ? "" : "Annotated"}>
-                <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
-            </div>)}
+            <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+            )}
         </div>
     );
 
