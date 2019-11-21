@@ -27,7 +27,7 @@ const App = () => {
   // get annotClassList from json
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/annot-list")
+      .get("http://gpu2:3002/api/annot-list")
       .then(res =>{
         setAnnotClassList(res.data.classList);
       });

@@ -30,7 +30,7 @@ const Mosaic = (props) => {
         if (conf) {
             // send post request
             axios
-                .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
+                .post("http://gpu2:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
                     console.log(res);
                     // rerender Mosaic
