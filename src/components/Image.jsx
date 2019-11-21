@@ -35,7 +35,7 @@ const Image = (props) => {
         annot_machine_label,
         annot_human_label
     } = props.image;
-    const imageDir = "../../../..";
+    const imageDir = "";
 
     // handle click event
     const onImageClick = (e) => {
