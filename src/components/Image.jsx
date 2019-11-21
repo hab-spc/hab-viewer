@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
-
+import Popup from './Popup';
 
 /**
  * Component to render a single image, and handle it's state
  * 
  */
 const Image = (props) => {
+    console.log("Starting Image creation...");
     const [selected, setSelected] = useState(false);
+    
+    // State for the popup modal
+    const [popup, setPopup] = useState(false);
 
     // destructure image object received
-    // important deets: id, axisLengths, area, prediction, probability
     const {
         image_filename,
         image_id,
@@ -41,13 +44,21 @@ const Image = (props) => {
 
     // handle click event
     const onImageClick = (e) => {
-        // call previous onClick
-        props.onClick(e, !selected);
-        
-        // change selected state
-        setSelected(!selected);
-
+        console.log("Cclick detected");
+        if (e.altKey) {
+            console.log("Alt-click detected");
+            setPopup(true);
+            
+        } else {
+            // call previous onClick
+            props.onClick(e, !selected);
+            
+            // change selected state
+            setSelected(!selected);
+        }
     }
+
+    console.log("Creating an image, finally!");
 
     return(
         <div className="Image">
@@ -57,6 +68,7 @@ const Image = (props) => {
             </div>) : (
             <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             )}
+            {popup ? <Popup show={popup} image={props.image} handleClose={setPopup(false)}/> : <div></div>}
         </div>
     );
 
