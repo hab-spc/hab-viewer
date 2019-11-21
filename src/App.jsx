@@ -11,6 +11,7 @@ import axios from 'axios';
 // parent component
 // handles img state
 // TODO add dynamic filter upon new annotation
+// onFilterChange clear selected
 const App = () => {
 
   // define image state
