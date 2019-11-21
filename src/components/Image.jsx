@@ -59,7 +59,13 @@ const Image = (props) => {
             <div className="red-border">
                 <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             </div>) : (
-            <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+                ml_user_labels == null ?
+                <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+                : (
+                    <div className="Annotated">
+                        <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
+                    </div>
+                )
             )}
         </div>
     );
