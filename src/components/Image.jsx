@@ -36,7 +36,7 @@ const Image = (props) => {
         annot_machine_label,
         annot_human_label
     } = props.image;
-    const imageDir = "../../../../../..";
+    const imageDir = ".";
 
     // handle click event
     const onImageClick = (e) => {
@@ -57,13 +57,13 @@ const Image = (props) => {
         <div className="Image">
             {selected ? (
             <div className="red-border">
-                <img src={require(imageDir + image_filename)} alt={image_id} onClick={onImageClick}/>
+                <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
             </div>) : (
                 ml_user_labels == null ?
-                <img src={require(imageDir + image_filename)} alt={image_id} onClick={onImageClick}/>
+                <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
                 : (
                     <div className="Annotated">
-                        <img src={require(imageDir + image_filename)} alt={image_id} onClick={onImageClick}/>
+                        <img src={imageDir + image_filename} alt={image_id} onClick={onImageClick}/>
                     </div>
                 )
             )}
