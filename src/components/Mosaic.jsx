@@ -77,7 +77,7 @@ const Mosaic = (props) => {
     return(
         <div className="Mosaic">            
             {popupImage != null ? 
-                <Popup image={popupImage} handleClose={handlePopupClose} centered/> : 
+                <Popup image={popupImage} handlePopupClose={handlePopupClose} centered/> : 
                 <div></div>}
 
             { imgsToRender.map((img) => {
