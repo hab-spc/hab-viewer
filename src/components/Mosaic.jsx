@@ -46,6 +46,7 @@ const Mosaic = (props) => {
                 });
             
             // TODO clear all selections 
+            addToImgs([]);
         }
         
     }
@@ -73,7 +74,6 @@ const Mosaic = (props) => {
         imgsToRender = props.images;
     }
 
-    // TODO add yellow border for annotated
     return(
         <div className="Mosaic">            
             {popupImage != null ? 
