@@ -8,7 +8,7 @@ import Options from './components/Options';
 
 
 // Used for react-bootstrap modal
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 
 import axios from 'axios';
 
@@ -46,10 +46,12 @@ const App = () => {
       dateStart + " " +
       dateEnd;
 
+    console.log("Submitted date");
     // get all images from that date, and time
     axios
       .get(`http://localhost:3002/api/imgs/${DateTimeStr}`)
       .then(res => {
+        console.log("Retrieved images! " + res);
         setImages(res.data.data);
         // compute list of classes from response
         setClassList(['All', ...new Set(res.data.data.map(img => img.ml_prediction))]);

@@ -7,6 +7,7 @@ import React, {useState} from 'react';
 const Image = (props) => {
     const [selected, setSelected] = useState(false);
 
+    console.log("Displaying image");
 
     // destructure image object received
     const {
