@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import './Modal.css';
 import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';

@@ -17,7 +17,6 @@ const Mosaic = (props) => {
     const [popupImage, setPopupImage] = useState(null);
     const handlePopupOpen = (imageArg) => setPopupImage(imageArg);
     const handlePopupClose = () => setPopupImage(null);
-    console.log("Popup state set to " + popupImage);
 
     // update annotation in DB
     const handleAnnotate = (e) => {
@@ -80,7 +79,7 @@ const Mosaic = (props) => {
     return(
         <div className="Mosaic">            
             {popupImage != null ? 
-                <Popup image={popupImage} handlePopupClose={handlePopupClose} centered/> : 
+                <Popup image={popupImage} handlePopupClose={handlePopupClose} show={true} /> : 
                 <div></div>}
 
             { imgsToRender.map((img) => {
