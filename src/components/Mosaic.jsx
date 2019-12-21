@@ -31,13 +31,11 @@ const Mosaic = (props) => {
             axios
                 .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
-                    console.log(res);
-                    // rerender Mosaic
+                                        // rerender Mosaic
                     const imgs = props.images.map((img) => {
                         if (selectedImgs.includes(img.image_id)){
                             img.ml_user_labels = props.currAnnotClass;
-                            console.log(img);
-                        } 
+                                                    } 
                         return img;
                     });
 
@@ -54,10 +52,10 @@ const Mosaic = (props) => {
     const selectImage = (e, selected) => {
 
         if(selected) {
-            console.log(`selected image ${e.target}`);
+            // console.log(`selected image ${e.target}`);
             addToImgs(selectedImgs.concat([e.target.alt]));
         } else {
-            console.log(`deselected image ${e.target}`);
+            // console.log(`deselected image ${e.target}`);
             addToImgs(selectedImgs.filter(img => img !== e.target.alt));
         }
     }
@@ -74,7 +72,7 @@ const Mosaic = (props) => {
         imgsToRender = props.images;
     }
 
-    console.log("imgsToRender: " + props.images);
+    // console.log("imgsToRender: " + props.images);
 
     return(
         <div className="Mosaic">            

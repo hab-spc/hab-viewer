@@ -7,7 +7,7 @@ import React, {useState} from 'react';
 const Image = (props) => {
     const [selected, setSelected] = useState(false);
 
-    console.log("Displaying image");
+    // console.log("Displaying image");
 
     // destructure image object received
     const {
@@ -43,7 +43,6 @@ const Image = (props) => {
     const onImageClick = (e) => {
         if (e.altKey) {
             props.handlePopupOpen(props.image);
-            console.log("Alt-click detected: " + props.image);
             
         } else {
             // call previous onClick
