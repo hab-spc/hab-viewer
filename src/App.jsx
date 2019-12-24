@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import './Modal.css';
 import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';
 import Annotate from './components/Annotate';
 import Options from './components/Options';
+
+
+// Used for react-bootstrap modal
+// import 'bootstrap/dist/css/bootstrap.css';
 
 import axios from 'axios';
 
@@ -46,9 +51,15 @@ const App = () => {
     axios
       .get(`http://gpu2:3002/api/imgs/${DateTimeStr}`)
       .then(res => {
+        if(res.data.data === []){
+          alert("No images received! \n Check the dates entered");
+        }
         setImages(res.data.data);
         // compute list of classes from response
         setClassList(['All', ...new Set(res.data.data.map(img => img.ml_prediction))]);
+      })
+      .catch(err => {
+        alert(`Error Occured: ${err}`);
       });
   }
 

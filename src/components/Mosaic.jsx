@@ -17,7 +17,6 @@ const Mosaic = (props) => {
     const [popupImage, setPopupImage] = useState(null);
     const handlePopupOpen = (imageArg) => setPopupImage(imageArg);
     const handlePopupClose = () => setPopupImage(null);
-    console.log("Popup state set to " + popupImage);
 
     // update annotation in DB
     const handleAnnotate = (e) => {
@@ -32,17 +31,17 @@ const Mosaic = (props) => {
             axios
                 .post("http://gpu2:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
-                    console.log(res);
                     // rerender Mosaic
                     const imgs = props.images.map((img) => {
                         if (selectedImgs.includes(img.image_id)){
                             img.ml_user_labels = props.currAnnotClass;
-                            console.log(img);
-                        } 
+                                                    } 
                         return img;
                     });
-
                     props.reRender(imgs);
+                })
+                .catch(err => {
+                    alert(`Error Occured: ${err}`);
                 });
             
             // TODO clear all selections 
@@ -55,10 +54,10 @@ const Mosaic = (props) => {
     const selectImage = (e, selected) => {
 
         if(selected) {
-            console.log(`selected image ${e.target}`);
+            // console.log(`selected image ${e.target}`);
             addToImgs(selectedImgs.concat([e.target.alt]));
         } else {
-            console.log(`deselected image ${e.target}`);
+            // console.log(`deselected image ${e.target}`);
             addToImgs(selectedImgs.filter(img => img !== e.target.alt));
         }
     }
@@ -69,15 +68,18 @@ const Mosaic = (props) => {
         imgsToRender = props.images.filter((img) => {
             if (img.ml_user_labels != null && img.ml_user_labels === props.currClass) return true;
             else if (img.ml_user_labels == null && img.ml_prediction === props.currClass) return true;
+            else return true;
         });
     } else {
         imgsToRender = props.images;
     }
 
+    // console.log("imgsToRender: " + props.images);
+
     return(
         <div className="Mosaic">            
             {popupImage != null ? 
-                <Popup image={popupImage} handleClose={handlePopupClose} centered/> : 
+                <Popup image={popupImage} handlePopupClose={handlePopupClose} show={true} /> : 
                 <div></div>}
 
             { imgsToRender.map((img) => {
