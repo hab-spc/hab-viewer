@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 const Popup = (props) => {
 
-    console.log("Popup opened");
+    // console.log("Popup openedl; props = " + props);
 
     // important deets: id, axisLengths, area, prediction, probability
     const {
@@ -17,11 +17,12 @@ const Popup = (props) => {
         ml_probability
     } = props.image;
     const imageDir = "../../public";
+    // console.log("props.show = " + props.show);
 
     return (
         <div className="Popup">
-            <Modal.Dialog show={props.show}>
-                <Modal.Header closeButton>
+            <Modal show={props.show} onHide={props.handlePopupClose} centered size="sm">
+                <Modal.Header>
                     <img src={imageDir + image_filename} alt={image_id}/>
                 </Modal.Header>
 
@@ -37,7 +38,7 @@ const Popup = (props) => {
                 <Modal.Footer>
                     <Button variant="primary" onClick={props.handlePopupClose}>Close</Button>
                 </Modal.Footer>
-            </Modal.Dialog>
+            </Modal>
         </div>
     )
 };

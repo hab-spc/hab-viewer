@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import './Modal.css';
 import Mosaic from './components/Mosaic';
 import Query from './components/Query';
 import Filter from './components/Filter';
 import Annotate from './components/Annotate';
 import Options from './components/Options';
+
+
+// Used for react-bootstrap modal
+// import 'bootstrap/dist/css/bootstrap.css';
 
 import axios from 'axios';
 

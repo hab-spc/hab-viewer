@@ -1,0 +1,261 @@
+/* .modal-open      - body class for killing the scroll */
+/* .modal           - container to scroll within */
+/* .modal-dialog    - positioning shell for the actual modal */
+/* .modal-content   - actual modal w/ bg and corners and stuff */
+
+/* Variables */
+:root {
+
+    --modal-inner-padding:               1rem;
+
+    --modal-dialog-margin:               .5rem;
+    --modal-dialog-margin-y-sm-up:       1.75rem;
+
+    --modal-dialog-margin-2:               1rem;
+    --modal-dialog-margin-y-sm-up-2:       3.5rem;
+
+    --modal-title-line-height:           1.5;
+
+    --modal-content-color:               #000000;
+    --modal-content-bg:                  #ffffff;
+    --modal-content-border-color:        rgba(#000000, .2);
+    --modal-content-border-width:        1px;
+    --modal-content-border-radius:       .3rem;
+    --modal-content-box-shadow-xs:       0 .25rem .5rem rgba(#000000, .5);
+    --modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba(#000000, .5);
+
+    --modal-backdrop-bg:                 #000000;
+    --modal-backdrop-opacity:            .5;
+    --modal-header-border-color:         #dee2e6;
+    --modal-footer-border-color:         var(--modal-header-border-color);
+    --modal-header-border-width:         var(--modal-content-border-width);
+    --modal-footer-border-width:         var(--modal-header-border-width);
+    --modal-header-padding-y:            1rem;
+    --modal-header-padding-x:            1rem;
+    --modal-header-padding:              var(--modal-header-padding-y) var(--modal-header-padding-x);
+
+    --modal-xl:                          1140px;
+    --modal-lg:                          800px;
+    --modal-md:                          500px;
+    --modal-sm:                          300px;
+
+    --modal-fade-transform:              translate(0, -50px);
+    --modal-show-transform:              none;
+    --modal-transition:                  transform .3s ease-out;
+}
+
+.modal-open {
+  /* Kill the scroll on the body */
+  overflow: hidden;
+
+
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Container that the modal scrolls within */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Prevent Chrome on Windows from adding a focus outline. For details, see */
+  /* https://github.com/twbs/bootstrap/pull/10951. */
+  outline: 0;
+  /* We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a */
+  /* gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342 */
+  /* See also https://github.com/twbs/bootstrap/issues/17695 */
+}
+
+/* Shell div to position the modal with bottom padding */
+.modal-dialog {
+  position: relative;
+  max-width: 500pt;
+  margin: 0 auto;
+  /* allow clicks to pass through for custom click handling to close modal */
+  pointer-events: none;
+
+
+}
+
+  /* When fading in the modal, animate it to slide down */
+ .modal.fade.modal-dialog {
+    transition: var(--modal-transition);
+    transform: var(--modal-fade-transform);
+  }
+ .modal.show.modal-dialog {
+    transform: var(--modal-show-transform);
+  }
+
+.modal-dialog-scrollable {
+  display: flex; /* IE10/11 */
+  max-height: calc(100% - var(--modal-dialog-margin-2));
+
+
+}
+
+.modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - var(--modal-dialog-margin-2)); /* IE10/11 */
+    overflow: hidden;
+  }
+
+.modal-dialog-scrollable .modal-header,
+  .modal-dialog-scrollable .modal-footer {
+    flex-shrink: 0;
+  }
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+  }
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - var(--modal-dialog-margin-2));
+}
+  /* Ensure `modal-dialog-centered` extends the full height of the view (IE10/11) */
+.modal-dialog-centered::before {
+    display: block; /* IE10 */
+    height: calc(100vh - var(--modal-dialog-margin-2));
+    content: "";
+  }
+
+  /* Ensure `.modal-body` shows scrollbar (IE10/11) */
+.modal-dialog-centered.modal-dialog-scrollable {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+}
+
+.modal-dialog-centered.modal-dialog-scrollable .modal-content {
+    max-height: none;
+}
+
+.modal-dialog-centered.modal-dialog-scrollable::before {
+    content: none;
+}
+
+/* Actual modal */
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure `.modal-content` extends the full width of the parent `.modal-dialog` */
+  /* counteract the pointer-events: none; in the .modal-dialog */
+  color: var(--modal-content-color);
+  pointer-events: auto;
+  background-color: var(--modal-content-bg);
+  background-clip: padding-box;
+  border: var(--modal-content-border-width) solid var(--modal-content-border-color);
+  border-radius: var(--modal-content-border-radius);
+  box-shadow: var(--modal-content-box-shadow-xs);
+  /* Remove focus outline from opened modal */
+  outline: 0;
+}
+
+/* Modal background */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-backdrop-bg);
+
+}
+
+/* Fade for backdrop */
+.modal-backdrop.fade { opacity: 0; }
+.modal-backdrop.show { opacity: var(--modal-backdrop-opacity); }
+
+/* Modal header */
+/* Top section of the modal w/ title and dismiss */
+.modal-header {
+  display: flex;
+  align-items: flex-start; /* so the close btn always stays on the upper right corner */
+  justify-content: space-between; /* Put modal header elements (title and dismiss) on opposite ends */
+  padding: var(--modal-header-padding);
+  border-bottom: var(--modal-header-border-width) solid var(--modal-header-border-color);
+  border-top-left-radius: var(--modal-content-border-radius);
+  border-top-right-radius: var(--modal-content-border-radius);
+
+}
+.modal-header .close {
+  padding: var(--modal-header-padding);
+  /* auto on the left force icon to the right even when there is no .modal-title */
+  margin: (var(--modal-header-padding-y)) (var(--modal-header-padding-x)) (var(--modal-header-padding-y)) auto;
+}
+
+/* Title text within header */
+.modal-title {
+  margin-bottom: 0;
+  line-height: var(--modal-title-line-height);
+}
+
+/* Modal body */
+/* Where all modal content resides (sibling of .modal-header and .modal-footer) */
+.modal-body {
+  position: relative;
+  /* Enable `flex-grow: 1` so that the body take up as much space as possible */
+  /* when should there be a fixed height on `.modal-dialog`. */
+  flex: 1 1 auto;
+  padding: var(--modal-inner-padding);
+}
+
+/* Footer (for actions) */
+.modal-footer {
+  display: flex;
+  align-items: center; /* vertically center */
+  justify-content: flex-end; /* Right align buttons with flex property because text-align doesn't work on flex items */
+  padding: var(--modal-inner-padding);
+  border-top: var(--modal-footer-border-width) solid var(--modal-footer-border-color);
+  border-bottom-right-radius: var(--modal-content-border-radius);
+  border-bottom-left-radius: var(--modal-content-border-radius);
+
+}
+/* Easily place margin between footer elements */
+.modal-footer > :not(:first-child) { margin-left: .25rem; }
+.modal-footer > :not(:last-child) { margin-right: .25rem; }
+
+/* Measure scrollbar width for padding body during modal show/hide */
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+/* Scale up the modal */
+/* Automatically set modal's width for larger viewports *//*
+@media (min-width: breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))) {
+	 .modal-dialog {
+		 max-width: var(--modal-md);
+		 margin: var(--modal-dialog-margin-y-sm-up) auto;
+	}
+	 .modal-dialog-scrollable {
+		 max-height: calc(100% - var(--modal-dialog-margin-y-sm-up-)2);
+	}
+	 .modal-dialog-scrollable .modal-content {
+		 max-height: calc(100vh - var(--modal-dialog-margin-y-sm-up-)2);
+	}
+	 .modal-dialog-centered {
+		 min-height: calc(100% - var(--modal-dialog-margin-y-sm-up-)2);
+	}
+	 .modal-dialog-centered::before {
+		 height: calc(100vh - var(--modal-dialog-margin-y-sm-up-)2);
+	}
+	 .modal-sm {
+		 max-width: var(--modal-sm);
+	}
+}
+*/
