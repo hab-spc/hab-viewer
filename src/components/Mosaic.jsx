@@ -31,15 +31,17 @@ const Mosaic = (props) => {
             axios
                 .post("http://localhost:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
                 .then( res => {
-                                        // rerender Mosaic
+                    // rerender Mosaic
                     const imgs = props.images.map((img) => {
                         if (selectedImgs.includes(img.image_id)){
                             img.ml_user_labels = props.currAnnotClass;
                                                     } 
                         return img;
                     });
-
                     props.reRender(imgs);
+                })
+                .catch(err => {
+                    alert(`Error Occured: ${err}`);
                 });
             
             // TODO clear all selections 
