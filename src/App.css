@@ -88,9 +88,12 @@ hr {
 
 /* Mosaic rules */
 .Mosaic {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: #282c38;
+  text-align: center;
+  height: 100%;
 }
 
 .Mosaic form {
@@ -111,6 +114,8 @@ hr {
 /* Image rules */
 .Image {
   display: inline;
+  width: auto;
+  height: auto;
   margin: 20px;
   border: 2px solid gray;
 }
