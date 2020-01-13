@@ -17,7 +17,7 @@ const Popup = (props) => {
         ml_probability
     } = props.image;
     const imageDir = "../../public";
-    // console.log("props.show = " + props.show);
+    console.log("imageDir + image_filename = " + imageDir + image_filename);
 
     return (
         <div className="Popup">
