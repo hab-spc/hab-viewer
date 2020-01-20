@@ -37,14 +37,14 @@ hr {
 
 /* filter rules */
 .Filter {
-  position:relative;
+  position: relative;
   top: 0;
   width: 100%;
   text-align: center;
 }
 
 .Filter select {
-  padding:  5px;
+  padding: 5px;
   margin: 10px 5px;
   border-radius: 10px;
 }
@@ -56,7 +56,7 @@ hr {
 
 /* annotate rules */
 .Annotate {
-  position:relative;
+  position: relative;
   top: 0;
   width: 100%;
   text-align: left;
@@ -123,8 +123,11 @@ hr {
   border: 3px solid yellow;
 }
 
-/* Option Tab rules */
+.Validated {
+  border: 3px solid plum;
+}
 
+/* Option Tab rules */
 
 /* Add class rules */
 .AddClass input {
@@ -134,4 +137,38 @@ hr {
 
 .AddClass label {
   margin: 30px 20px;
+}
+
+/* login rules */
+.login-container {
+  border-radius: 8px;
+  background-color: #e5e5e5;
+  position: absolute;
+  height: 250px;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.login-container input {
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.login-btn {
+  border-radius: 8px;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+}
+
+input.login-btn:hover {
+  border-radius: 8px;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
 }

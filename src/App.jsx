@@ -99,11 +99,11 @@ const App = () => {
   /** LOGIN LOGIC */
   // check for login
   useEffect(() => {
-    user = localStorage.getItem('user');
-    if (user && user === 'sarah') {
+    let savedUser = localStorage.getItem('user');
+    if (savedUser && savedUser === 'sarah') {
       setLoggedIn(true);
       setExpert(false);
-    } else if (user && user === 'melissa') {
+    } else if (savedUser && savedUser === 'melissa') {
       setLoggedIn(true);
       setExpert(true);
     }
@@ -174,18 +174,22 @@ const App = () => {
       ) : (
         <div className="login-container">
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Username"
-              value={user}
-              onChange={handleUserChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={pass}
-              onChange={handlePassChange}
-            />
+            <div>
+              <input
+                type="text"
+                placeholder="Username"
+                value={user}
+                onChange={handleUserChange}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                value={pass}
+                onChange={handlePassChange}
+              />
+            </div>
             <input type="submit" value="Login" className="login-btn" />
           </form>
         </div>

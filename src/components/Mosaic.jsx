@@ -15,7 +15,7 @@ const Mosaic = props => {
   const [popupImage, setPopupImage] = useState(null);
   const handlePopupOpen = imageArg => setPopupImage(imageArg);
   const handlePopupClose = () => setPopupImage(null);
-  const prompt_message = expert ? 'validated' : 'annotated';
+  const prompt_message = props.expert ? 'validated' : 'annotated';
 
   // update annotation in DB
   const handleAnnotate = e => {
@@ -130,7 +130,10 @@ const Mosaic = props => {
         );
       })}
       <form onSubmit={handleAnnotate}>
-        <input type="submit" value="Annotate"></input>
+        <input
+          type="submit"
+          value={props.expert ? 'Validate' : 'Annotate'}
+        ></input>
       </form>
     </div>
   );
