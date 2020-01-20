@@ -68,7 +68,6 @@ const Mosaic = (props) => {
         imgsToRender = props.images.filter((img) => {
             if (img.ml_user_labels != null && img.ml_user_labels === props.currClass) return true;
             else if (img.ml_user_labels == null && img.ml_prediction === props.currClass) return true;
-            else return true;
         });
     } else {
         imgsToRender = props.images;
