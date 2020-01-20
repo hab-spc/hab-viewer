@@ -157,6 +157,7 @@ const App = () => {
               currAnnotClass={currAnnotClass}
               viewAnnotate={viewAnnotate}
               onViewChange={onViewChange}
+              expert={expert}
             />
           </div>
           <Options setAnnotClassList={setAnnotClassList} />
@@ -167,11 +168,12 @@ const App = () => {
             currAnnotClass={currAnnotClass}
             viewAnnotate={viewAnnotate}
             reRender={reRender}
+            expert={expert}
           />
         </div>
       ) : (
         <div className="login-container">
-          <form onSubmit={hadnleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username"
@@ -182,7 +184,7 @@ const App = () => {
               type="password"
               placeholder="Password"
               value={pass}
-              onChange={handlePasChange}
+              onChange={handlePassChange}
             />
             <input type="submit" value="Login" className="login-btn" />
           </form>

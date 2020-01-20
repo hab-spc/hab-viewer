@@ -15,20 +15,46 @@ const Mosaic = props => {
   const [popupImage, setPopupImage] = useState(null);
   const handlePopupOpen = imageArg => setPopupImage(imageArg);
   const handlePopupClose = () => setPopupImage(null);
+  const prompt_message = expert ? 'validated' : 'annotated';
 
   // update annotation in DB
   const handleAnnotate = e => {
     e.preventDefault();
 
-    // alert about annotation
-    const conf = window.confirm(
-      `You annotated ${selectedImgs.length} Images as ${props.currAnnotClass}`
-    );
+    if (!props.expert) {
+      // alert about annotation
+      const conf = window.confirm(
+        `You ${prompt_message} ${selectedImgs.length} Images as ${props.currAnnotClass}`
+      );
 
-    if (conf) {
+      if (conf) {
+        // send post request
+        axios
+          .post('http://localhost:3002/api/annot', {
+            imgs: selectedImgs,
+            class: props.currAnnotClass
+          })
+          .then(res => {
+            // rerender Mosaic
+            const imgs = props.images.map(img => {
+              if (selectedImgs.includes(img.image_id)) {
+                img.ml_user_labels = props.currAnnotClass;
+              }
+              return img;
+            });
+            props.reRender(imgs);
+          })
+          .catch(err => {
+            alert(`Error Occured: ${err}`);
+          });
+
+        // TODO clear all selections
+        addToImgs([]);
+      }
+    } else {
       // send post request
       axios
-        .post('http://localhost:3002/api/annot', {
+        .post('http://localhost:3002/api/validate', {
           imgs: selectedImgs,
           class: props.currAnnotClass
         })
