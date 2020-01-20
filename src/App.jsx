@@ -170,6 +170,9 @@ const App = () => {
             reRender={reRender}
             expert={expert}
           />
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       ) : (
         <div className="login-container">
