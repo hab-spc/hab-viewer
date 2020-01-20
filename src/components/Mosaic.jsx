@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from './Image';
 import Popup from './Popup';
 import axios from 'axios';
@@ -62,7 +62,7 @@ const Mosaic = props => {
           // rerender Mosaic
           const imgs = props.images.map(img => {
             if (selectedImgs.includes(img.image_id)) {
-              img.ml_user_labels = props.currAnnotClass;
+              img.annot_human_label = true;
             }
             return img;
           });
@@ -99,11 +99,15 @@ const Mosaic = props => {
         img.ml_prediction === props.currClass
       )
         return true;
-      else return true;
+      else return false;
     });
   } else {
     imgsToRender = props.images;
   }
+
+  useEffect(() => {
+    addToImgs([]);
+  }, [props.currClass]);
 
   // console.log("imgsToRender: " + props.images);
 

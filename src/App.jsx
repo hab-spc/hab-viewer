@@ -30,6 +30,7 @@ const App = () => {
   const [pass, setPass] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [expert, setExpert] = useState(false);
+  const [validate, setValidate] = useState(false);
 
   // get annotClassList from json
   useEffect(() => {
@@ -157,7 +158,7 @@ const App = () => {
               currAnnotClass={currAnnotClass}
               viewAnnotate={viewAnnotate}
               onViewChange={onViewChange}
-              expert={expert}
+              expert={validate}
             />
           </div>
           <Options setAnnotClassList={setAnnotClassList} />
@@ -168,11 +169,21 @@ const App = () => {
             currAnnotClass={currAnnotClass}
             viewAnnotate={viewAnnotate}
             reRender={reRender}
-            expert={expert}
+            expert={validate}
           />
           <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>
+          {expert ? (
+            <button
+              className="select-all-btn"
+              onClick={e => setValidate(!validate)}
+            >
+              Switch to {validate ? 'Annotate' : 'Validate'} Mode
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         <div className="login-container">
