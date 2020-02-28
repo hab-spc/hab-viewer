@@ -1,22 +1,200 @@
+body {
+  background-color: #282c34;
+  color: #ffffff;
+}
+
+/* app level rules */
 .App {
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  border-radius: 10px;
+}
+
+hr {
+  margin: 0;
+}
+
+/* query rules */
+.Query {
+  position: relative;
+  top: 0;
+  width: 100%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.Query label {
+  padding: 5px;
+  margin: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Query input {
+  margin: 20px 5px;
+  padding: 5px;
+}
+
+/* filter rules */
+.Filter {
+  position: relative;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.Filter select {
+  padding: 5px;
+  margin: 10px 5px;
+  border-radius: 10px;
+}
+
+.Filter label {
+  padding: 5px;
+  margin: 5px;
+}
+
+/* annotate rules */
+.Annotate {
+  position: relative;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  height: 50px;
+}
+
+.Annotate select {
+  padding: 5px;
+  margin: 10px 5px;
+  border-radius: 10px;
+}
+
+.Annotate label {
+  padding: 5px;
+  margin: 5px;
+}
+
+.Annotate input {
+  padding: 5px;
+  margin: 5px;
+}
+
+/* toolbar rules */
+.view-toolbar {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  padding: 10px 0px;
+}
+
+/* Mosaic rules */
+.Mosaic {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #282c38;
+  text-align: center;
+  height: 100%;
 }
 
-.App-link {
-  color: #09d3ac;
+.annotate-btn {
+  position: sticky;
+  bottom: 0;
+  background-color: #282c34;
+  width: auto;
+  text-align: right;
+  padding: 30px 40px;
+}
+
+.annotate-btn input {
+  position: relative;
+  right: 5px;
+  padding: 7px;
+}
+
+.select-all-btn {
+  position: fixed;
+  right: 1rem;
+  top: 7rem;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #2caf78;
+  color: white;
+  border: none;
+}
+
+/* Image rules */
+.Image {
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 20px;
+}
+
+.red-border {
+  border: 3px solid red;
+}
+
+.Annotated {
+  border: 3px solid yellow;
+}
+
+.Validated {
+  border: 3px solid plum;
+}
+
+/* Option Tab rules */
+
+/* Add class rules */
+.AddClass input {
+  margin: 10px 5px;
+  padding: 5px;
+}
+
+.AddClass label {
+  margin: 30px 20px;
+}
+
+/* login rules */
+.login-container {
+  border-radius: 8px;
+  background-color: #e5e5e5;
+  position: absolute;
+  height: 250px;
+  width: 400px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.login-container input {
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.login-btn {
+  border-radius: 8px;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+}
+
+input.login-btn:hover {
+  border-radius: 8px;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+}
+
+.logout-btn {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #af2c34;
+  color: white;
+  border: none;
 }
