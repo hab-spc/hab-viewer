@@ -69,6 +69,7 @@
   /* Prevent Chrome on Windows from adding a focus outline. For details, see */
   /* https://github.com/twbs/bootstrap/pull/10951. */
   outline: 0;
+
   /* We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a */
   /* gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342 */
   /* See also https://github.com/twbs/bootstrap/issues/17695 */
@@ -180,15 +181,22 @@
 /* Modal header */
 /* Top section of the modal w/ title and dismiss */
 .modal-header {
-  display: flex;
+  margin: auto;
+  display: block;
   align-items: flex-start; /* so the close btn always stays on the upper right corner */
   justify-content: space-between; /* Put modal header elements (title and dismiss) on opposite ends */
   padding: var(--modal-header-padding);
   border-bottom: var(--modal-header-border-width) solid var(--modal-header-border-color);
   border-top-left-radius: var(--modal-content-border-radius);
   border-top-right-radius: var(--modal-content-border-radius);
-
 }
+
+.modal img {
+  width: 80%;
+  clear: both;
+  float: left;
+}
+
 .modal-header .close {
   padding: var(--modal-header-padding);
   /* auto on the left force icon to the right even when there is no .modal-title */
