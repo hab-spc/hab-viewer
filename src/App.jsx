@@ -57,8 +57,9 @@ const App = () => {
         // compute list of classes from response
         setClassList([
           'All',
-          ...new Set(res.data.data.map(img => img.ml_prediction))
-        ]);
+          ...new Set(res.data.data.map(img => img.ml_user_labels),),
+          ...new Set(res.data.data.map(img => img.ml_predictions),),
+        ].sort());
       })
       .catch(err => {
         alert(`Error Occured: ${err} ${DateTimeStr} another error`);
