@@ -39,3 +39,4 @@ const AddClass = (props) => {
 }
 
 export default AddClass;
+

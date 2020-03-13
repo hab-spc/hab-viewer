@@ -14,6 +14,7 @@ import axios from 'axios';
 
 // parent component
 // handles img state
+
 // onFilterChange clear selected
 const App = () => {
   // define image state
