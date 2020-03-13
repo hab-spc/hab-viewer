@@ -20,33 +20,31 @@ const Mosaic = props => {
   // update annotation in DB
   const handleAnnotate = e => {
     e.preventDefault();
+      
+    // alert about annotation
+    const conf = window.confirm(
+      `You ${prompt_message} ${selectedImgs.length} Images as ${props.currAnnotClass}`
+    );
 
     if (!props.expert) {
-      // alert about annotation
-      const conf = window.confirm(
-        `You ${prompt_message} ${selectedImgs.length} Images as ${props.currAnnotClass}`
-      );
 
-      if (conf) {
-        // send post request
-        axios
-          .post('http://localhost:3002/api/annot', {
-            imgs: selectedImgs,
-            class: props.currAnnotClass
-          })
-          .then(res => {
-            // rerender Mosaic
-            const imgs = props.images.map(img => {
-              if (selectedImgs.includes(img.image_id)) {
-                img.ml_user_labels = props.currAnnotClass;
-              }
-              return img;
-            });
-            props.reRender(imgs);
-          })
-          .catch(err => {
-            alert(`Error Occured: ${err}`);
-          });
+        if (conf) {
+            // send post request
+            axios
+                .post("http://gpu2:3002/api/annot", {"imgs": selectedImgs, "class": props.currAnnotClass})
+                .then( res => {
+                    // rerender Mosaic
+                    const imgs = props.images.map((img) => {
+                        if (selectedImgs.includes(img.image_id)){
+                            img.ml_user_labels = props.currAnnotClass;
+                                                    } 
+                        return img;
+                    });
+                    props.reRender(imgs);
+                })
+                .catch(err => {
+                    alert(`Error Occured: ${err}`);
+                });
 
         // TODO clear all selections
         addToImgs([]);
@@ -54,7 +52,7 @@ const Mosaic = props => {
     } else {
       // send post request
       axios
-        .post('http://localhost:3002/api/validate', {
+        .post('http://gpu2:3002/api/validate', {
           imgs: selectedImgs,
           class: props.currAnnotClass
         })
@@ -112,6 +110,7 @@ const Mosaic = props => {
   // console.log("imgsToRender: " + props.images);
 
   return (
+    <>
     <div className="Mosaic">
       {popupImage != null ? (
         <Popup
@@ -133,13 +132,15 @@ const Mosaic = props => {
           />
         );
       })}
-      <form onSubmit={handleAnnotate}>
-        <input
-          type="submit"
-          value={props.expert ? 'Validate' : 'Annotate'}
-        ></input>
-      </form>
+
     </div>
+     <form className="annotate-btn" onSubmit={handleAnnotate}>
+       <input
+         type="submit"
+         value={props.expert ? 'Validate' : 'Annotate'}
+       ></input>
+     </form>
+    </>
   );
 };
 

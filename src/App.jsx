@@ -14,7 +14,7 @@ import axios from 'axios';
 
 // parent component
 // handles img state
-// TODO add dynamic filter upon new annotation
+
 // onFilterChange clear selected
 const App = () => {
   // define image state
@@ -34,9 +34,11 @@ const App = () => {
 
   // get annotClassList from json
   useEffect(() => {
-    axios.get('http://localhost:3002/api/annot-list').then(res => {
-      setAnnotClassList(res.data.classList);
-    });
+    axios
+      .get("http://gpu2:3002/api/annot-list")
+      .then(res =>{
+        setAnnotClassList(res.data.classList);
+      });
   }, []);
 
   // get images from server on query
@@ -47,7 +49,7 @@ const App = () => {
 
     // get all images from that date, and time
     axios
-      .get(`http://localhost:3002/api/imgs/${DateTimeStr}`)
+      .get(`http://gpu2:3002/api/imgs/${DateTimeStr}`)
       .then(res => {
         if (res.data.data === []) {
           alert('No images received! \n Check the dates entered');
@@ -56,8 +58,9 @@ const App = () => {
         // compute list of classes from response
         setClassList([
           'All',
-          ...new Set(res.data.data.map(img => img.ml_prediction))
-        ]);
+          ...new Set(res.data.data.map(img => img.ml_user_labels),),
+          ...new Set(res.data.data.map(img => img.ml_predictions),),
+        ].sort());
       })
       .catch(err => {
         alert(`Error Occured: ${err}`);
@@ -152,14 +155,21 @@ const App = () => {
               onClassChange={onClassChange}
               currClass={currClass}
             />
+            {!expert ?
             <Annotate
               classList={annotClassList}
               onAnnotClassChange={onAnnotClassChange}
               currAnnotClass={currAnnotClass}
               viewAnnotate={viewAnnotate}
               onViewChange={onViewChange}
-              expert={validate}
-            />
+            /> : !validate ? 
+              <Annotate
+              classList={annotClassList}
+              onAnnotClassChange={onAnnotClassChange}
+              currAnnotClass={currAnnotClass}
+              viewAnnotate={viewAnnotate}
+              onViewChange={onViewChange}
+            /> : '' }
           </div>
           <Options setAnnotClassList={setAnnotClassList} />
           <hr />

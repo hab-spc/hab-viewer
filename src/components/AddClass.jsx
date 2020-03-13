@@ -13,7 +13,7 @@ const AddClass = (props) => {
     const handleAddClass = (e) => {
         e.preventDefault();
         axios
-            .post(`http://localhost:3002/api/annot-list/${newClass}`)
+            .post(`http://gpu2:3002/api/annot-list/${newClass}`)
             .then((res) => {
                 props.setAnnotClassList(res.data.classList);
             });
@@ -39,3 +39,4 @@ const AddClass = (props) => {
 }
 
 export default AddClass;
+

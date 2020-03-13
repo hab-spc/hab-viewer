@@ -7,8 +7,6 @@ import React, { useState } from 'react';
 const Image = props => {
   const [selected, setSelected] = useState(false);
 
-  // console.log("Displaying image");
-
   // destructure image object received
   const {
     image_filename,
@@ -37,7 +35,7 @@ const Image = props => {
     annot_machine_label,
     annot_human_label
   } = props.image;
-  const imageDir = '../../public';
+  const imageDir = '.';
 
   // handle click event
   const onImageClick = e => {

@@ -7,6 +7,7 @@ body {
 .App {
   height: 100%;
   width: 100%;
+  position: fixed;
 }
 
 input {
@@ -88,24 +89,28 @@ hr {
 
 /* Mosaic rules */
 .Mosaic {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: #282c38;
+  text-align: center;
+  height: 100%;
+  overflow: scroll;
 }
 
-.Mosaic form {
-  position: fixed;
+.annotate-btn {
+  position: sticky;
   bottom: 0;
   background-color: #282c34;
-  width: 100%;
+  width: auto;
   text-align: right;
-  padding: 30px 40px;
+  padding: 10px 40px;
 }
 
-.Mosaic form input {
+.annotate-btn input {
   position: relative;
-  right: 100px;
-  padding: 10px;
+  right: 5px;
+  padding: 7px;
 }
 
 .select-all-btn {
@@ -122,8 +127,9 @@ hr {
 /* Image rules */
 .Image {
   display: inline;
+  width: auto;
+  height: auto;
   margin: 20px;
-  border: 2px solid gray;
 }
 
 .red-border {

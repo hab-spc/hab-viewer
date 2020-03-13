@@ -8,7 +8,7 @@ const Annotate = props => {
   return (
     <div className="Annotate">
       <label>
-        {props.expert ? 'Validate' : 'Annotate'} as Class:
+        Annotate as Class:
         <select
           value={props.currAnnotClass}
           onChange={props.onAnnotClassChange}

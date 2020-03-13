@@ -14,15 +14,16 @@ const Popup = (props) => {
         image_minor_axis_length,
         image_area,
         ml_prediction,
-        ml_probability
+        ml_probability,
+        ml_user_labels
     } = props.image;
-    const imageDir = "../../public";
+    const imageDir = ".";
     // console.log("props.show = " + props.show);
 
     return (
         <div className="Popup">
             <Modal show={props.show} onHide={props.handlePopupClose} centered size="sm">
-                <Modal.Header>
+                <Modal.Header className="text-center">
                     <img src={imageDir + image_filename} alt={image_id}/>
                 </Modal.Header>
 
@@ -32,6 +33,7 @@ const Popup = (props) => {
                         <li>Axes: {image_major_axis_length}, {image_minor_axis_length}</li>
                         <li>Area: {image_area}</li>
                         <li>ML Prediction: {ml_prediction} (Probability {ml_probability})</li>
+                        <li>Label: {ml_user_labels}</li>
                     </ul>
                 </Modal.Body>
 
